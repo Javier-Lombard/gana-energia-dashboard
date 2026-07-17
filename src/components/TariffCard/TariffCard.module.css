@@ -1,0 +1,101 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  padding: var(--spacing-6);
+  background-color: var(--color-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+}
+
+.icon {
+  font-size: 1.25rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-5);
+  text-align: center;
+}
+
+.tariffPill {
+  padding: var(--spacing-3) var(--spacing-6);
+  background-color: var(--color-primary-tint);
+  border-radius: 999px;
+  font-size: 1.0625rem;
+  color: var(--color-text-dark);
+}
+
+.powerRow {
+  display: flex;
+  gap: var(--spacing-6);
+}
+
+.field {
+  font-size: 0.9375rem;
+}
+
+.label {
+  font-weight: 700;
+  color: var(--color-text-dark);
+}
+
+.value {
+  color: var(--color-text-dark);
+}
+
+.emptyMessage {
+  margin: 0;
+  padding: var(--spacing-6) 0;
+  text-align: center;
+  font-size: 0.9375rem;
+  color: var(--color-gray-text);
+}
+
+.skeleton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-5);
+}
+
+.skeletonPill {
+  width: 160px;
+  height: 40px;
+  border-radius: 999px;
+  background-color: var(--color-gray-light);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.skeletonLine {
+  width: 200px;
+  height: 16px;
+  border-radius: var(--radius-sm);
+  background-color: var(--color-gray-light);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}

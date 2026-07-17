@@ -1,0 +1,107 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  padding: var(--spacing-6);
+  background-color: var(--color-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-card);
+}
+
+.chartWrapper {
+  width: 100%;
+}
+
+.tickMonth {
+  font-size: 0.75rem;
+  font-weight: 700;
+  fill: var(--color-text-dark);
+}
+
+.tickYear {
+  font-size: 0.75rem;
+  fill: var(--color-gray-text);
+}
+
+.tooltip {
+  position: relative;
+  padding: var(--spacing-2) var(--spacing-4);
+  background-color: #2d2d3a;
+  color: var(--color-white);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  white-space: nowrap;
+  transform: translateY(-12px);
+}
+
+.tooltip::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid #2d2d3a;
+}
+
+.skeleton {
+  width: 100%;
+  height: 320px;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-gray-light);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.stateBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-4);
+  height: 320px;
+  text-align: center;
+}
+
+.emptyIcon {
+  font-size: 2.5rem;
+}
+
+.emptyMessage {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--color-gray-text);
+}
+
+.errorMessage {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: var(--color-text-dark);
+}
+
+.retryButton {
+  padding: var(--spacing-3) var(--spacing-6);
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  border: none;
+  border-radius: 999px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+}
+
+.retryButton:hover {
+  background-color: var(--color-primary-dark);
+}

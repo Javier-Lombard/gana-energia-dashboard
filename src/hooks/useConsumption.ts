@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { getConsumption } from '../api/services';
 import type { ConsumptionRecord } from '../types';
 
@@ -6,6 +6,7 @@ interface UseConsumptionResult {
   consumption: ConsumptionRecord[];
   loading: boolean;
   error: string | null;
+  refetch: () => void;
 }
 
 export function useConsumption(
@@ -14,6 +15,7 @@ export function useConsumption(
   const [consumption, setConsumption] = useState<ConsumptionRecord[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [reloadToken, setReloadToken] = useState(0);
 
   useEffect(() => {
     if (contractId === null) {
@@ -54,7 +56,11 @@ export function useConsumption(
     return () => {
       cancelled = true;
     };
-  }, [contractId]);
+  }, [contractId, reloadToken]);
 
-  return { consumption, loading, error };
+  const refetch = useCallback(() => {
+    setReloadToken((token) => token + 1);
+  }, []);
+
+  return { consumption, loading, error, refetch };
 }

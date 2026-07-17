@@ -1,0 +1,26 @@
+.toggle {
+  display: inline-flex;
+  padding: 3px;
+  background-color: var(--color-gray-light);
+  border-radius: 999px;
+}
+
+.option {
+  min-width: 56px;
+  padding: var(--spacing-2) var(--spacing-4);
+  background-color: transparent;
+  border: none;
+  border-radius: 999px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
+}
+
+.optionActive {
+  background-color: #3ccfaf;
+  color: var(--color-white);
+}

@@ -5,43 +5,30 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-6);
-  padding: var(--spacing-4) var(--spacing-8);
+  padding: var(--spacing-5) var(--spacing-8);
   background-color: var(--color-white);
   border-bottom: 1px solid var(--color-gray-lighter);
-  box-shadow: var(--shadow-card);
 }
 
 .logoBlock {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--spacing-1);
+  gap: var(--spacing-2);
   flex-shrink: 0;
 }
 
 .logo {
   display: flex;
   align-items: center;
-  gap: var(--spacing-2);
-}
-
-.logoIcon {
-  font-size: 1.5rem;
-  line-height: 1;
-}
-
-.logoText {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: var(--color-text-dark);
 }
 
 .badge {
-  background-color: var(--color-text-dark);
+  background-color: #2b2f3a;
   color: var(--color-white);
-  font-size: 0.7rem;
+  font-size: 0.6875rem;
   font-weight: 600;
-  padding: 2px var(--spacing-2);
+  padding: 3px var(--spacing-3);
   border-radius: 999px;
 }
 
@@ -55,16 +42,18 @@
 }
 
 .avatar {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   object-fit: cover;
   background-color: var(--color-gray-light);
+  border: 2px solid var(--color-white);
+  box-shadow: 0 0 0 1px var(--color-gray-lighter);
   flex-shrink: 0;
 }
 
 .greeting {
-  color: var(--color-gray-text);
+  color: var(--color-text-dark);
   font-size: 0.9375rem;
   white-space: nowrap;
 }
@@ -85,11 +74,15 @@
   font-size: 0.9375rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 150ms ease;
+  box-shadow: 0 4px 10px rgba(0, 168, 112, 0.28);
+  transition:
+    background-color 150ms ease,
+    box-shadow 150ms ease;
 }
 
 .contractButton:hover {
   background-color: var(--color-primary-dark);
+  box-shadow: 0 4px 12px rgba(0, 168, 112, 0.36);
 }
 
 .logoutButton {
@@ -104,9 +97,12 @@
   font-size: 0.9375rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 150ms ease;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease;
 }
 
 .logoutButton:hover {
   background-color: var(--color-gray-light);
+  border-color: #d8dee5;
 }

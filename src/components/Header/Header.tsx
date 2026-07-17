@@ -2,7 +2,7 @@ import { useContractContext } from '../../context/ContractContext';
 import { ContractDropdown } from '../ContractDropdown/ContractDropdown';
 import type { Contract } from '../../types';
 import styles from './Header.module.css';
-
+import { GanarIcon } from '../ui/GanarIcon';
 interface HeaderProps {
   contracts: Contract[];
 }
@@ -18,10 +18,8 @@ export function Header({ contracts }: HeaderProps) {
     <header className={styles.header}>
       <div className={styles.logoBlock}>
         <div className={styles.logo}>
-          <span className={styles.logoIcon} aria-hidden="true">
-            💡
-          </span>
-          <span className={styles.logoText}>Gana Energía</span>
+         <GanarIcon/>
+         
         </div>
         <span className={styles.badge}>Área Cliente</span>
       </div>
