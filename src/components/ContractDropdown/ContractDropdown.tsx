@@ -33,7 +33,10 @@ export function ContractDropdown({
     setIsOpen(false);
   }
 
-  function handleOptionKeyDown(event: KeyboardEvent<HTMLLIElement>, id: number) {
+  function handleOptionKeyDown(
+    event: KeyboardEvent<HTMLLIElement>,
+    id: number,
+  ) {
     if (event.key === 'Enter' || event.key === ' ') {
       event.preventDefault();
       handleSelect(id);
@@ -77,7 +80,11 @@ export function ContractDropdown({
       </button>
 
       {isOpen && (
-        <ul id="contract-dropdown-listbox" role="listbox" className={styles.panel}>
+        <ul
+          id="contract-dropdown-listbox"
+          role="listbox"
+          className={styles.panel}
+        >
           {contracts.map((contract) => (
             <li
               key={contract.id}

@@ -50,7 +50,13 @@ export function Header({ contracts }: HeaderProps) {
           onClick={() => console.log('Salir')}
         >
           Salir
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+            aria-hidden="true"
+          >
             <path
               d="M6 2H3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"
               stroke="currentColor"
