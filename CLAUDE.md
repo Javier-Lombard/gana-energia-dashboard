@@ -1,6 +1,6 @@
-# Gana Energía — Dashboard Área Cliente
+# Dashboard Área Cliente
 
-Prueba técnica de Frontend Developer para Gana Energía: dashboard del Área
+Creación del dashboard del area de cliente para una empresa comercializadora de luz.
 Cliente de una comercializadora eléctrica (desplegable de contratos, tarjeta
 de tarifa, gráfica de historial de facturación). React + TypeScript + Vite.
 
