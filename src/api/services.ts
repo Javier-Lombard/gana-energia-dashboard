@@ -1,7 +1,5 @@
 import type { ApiError, Contract, ConsumptionRecord } from '../types';
 
-const BASE_URL = 'https://gana-front.vercel.app';
-
 async function parseErrorMessage(
   response: Response,
   fallback: string,
@@ -17,7 +15,7 @@ async function parseErrorMessage(
 export async function getContracts(): Promise<Contract[]> {
   let response: Response;
   try {
-    response = await fetch(`${BASE_URL}/api/contracts`);
+    response = await fetch('/api/contracts');
   } catch {
     throw new Error(
       'No se pudo conectar con el servidor para obtener los contratos',
@@ -41,9 +39,7 @@ export async function getConsumption(
 ): Promise<ConsumptionRecord[]> {
   let response: Response;
   try {
-    response = await fetch(
-      `${BASE_URL}/api/consumption?contract_id=${contractId}`,
-    );
+    response = await fetch(`/api/consumption?contract_id=${contractId}`);
   } catch {
     throw new Error(
       'No se pudo conectar con el servidor para obtener el historial de consumo',

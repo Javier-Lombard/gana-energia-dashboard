@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Header } from './components/Header/Header';
+import { WelcomeCard } from './components/WelcomeCard/WelcomeCard';
 import { TariffCard } from './components/TariffCard/TariffCard';
 import { BillingChart } from './components/BillingChart/BillingChart';
 import { ContractProvider, useContractContext } from './context/ContractContext';
@@ -29,6 +30,7 @@ function Dashboard() {
       <Header contracts={contracts} />
       <main className={styles.main}>
         <div className={styles.leftColumn}>
+          <WelcomeCard />
           <TariffCard contract={selectedContract} loading={contractsLoading} />
         </div>
         <BillingChart

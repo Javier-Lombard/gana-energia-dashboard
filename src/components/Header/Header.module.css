@@ -76,13 +76,19 @@
   cursor: pointer;
   box-shadow: 0 4px 10px rgba(0, 168, 112, 0.28);
   transition:
-    background-color 150ms ease,
-    box-shadow 150ms ease;
+    background-color 200ms ease,
+    box-shadow 200ms ease;
 }
 
 .contractButton:hover {
   background-color: var(--color-primary-dark);
   box-shadow: 0 4px 12px rgba(0, 168, 112, 0.36);
+}
+
+.contractButton:focus-visible,
+.logoutButton:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
 }
 
 .logoutButton {
@@ -98,8 +104,8 @@
   font-weight: 500;
   cursor: pointer;
   transition:
-    background-color 150ms ease,
-    border-color 150ms ease;
+    background-color 200ms ease,
+    border-color 200ms ease;
 }
 
 .logoutButton:hover {
