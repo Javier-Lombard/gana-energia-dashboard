@@ -1,23 +1,56 @@
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { Header } from './components/Header/Header';
+import { TariffCard } from './components/TariffCard/TariffCard';
 import { BillingChart } from './components/BillingChart/BillingChart';
+import { ContractProvider, useContractContext } from './context/ContractContext';
+import { useContracts } from './hooks/useContracts';
 import { useConsumption } from './hooks/useConsumption';
-import type { ViewMode } from './types';
+import styles from './App.module.css';
 
-function App() {
-  const { consumption, loading, error, refetch } = useConsumption(1);
-  const [viewMode, setViewMode] = useState<ViewMode>('eur');
+function Dashboard() {
+  const { state, dispatch } = useContractContext();
+  const { contracts, loading: contractsLoading } = useContracts();
+  const { consumption, loading, error, refetch } = useConsumption(
+    state.selectedContractId,
+  );
+
+  useEffect(() => {
+    if (contracts.length > 0 && state.selectedContractId === null) {
+      dispatch({ type: 'SELECT_CONTRACT', payload: contracts[0].id });
+    }
+  }, [contracts, state.selectedContractId, dispatch]);
+
+  const selectedContract =
+    contracts.find((contract) => contract.id === state.selectedContractId) ??
+    null;
 
   return (
-    <div style={{ padding: 24, maxWidth: 900, margin: '0 auto' }}>
-      <BillingChart
-        consumption={consumption}
-        viewMode={viewMode}
-        onViewModeChange={setViewMode}
-        loading={loading}
-        error={error}
-        onRetry={refetch}
-      />
-    </div>
+    <>
+      <Header contracts={contracts} />
+      <main className={styles.main}>
+        <div className={styles.leftColumn}>
+          <TariffCard contract={selectedContract} loading={contractsLoading} />
+        </div>
+        <BillingChart
+          consumption={consumption}
+          viewMode={state.viewMode}
+          onViewModeChange={(mode) =>
+            dispatch({ type: 'SET_VIEW_MODE', payload: mode })
+          }
+          loading={loading}
+          error={error}
+          onRetry={refetch}
+        />
+      </main>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <ContractProvider>
+      <Dashboard />
+    </ContractProvider>
   );
 }
 
