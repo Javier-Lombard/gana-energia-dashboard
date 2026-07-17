@@ -1,10 +1,10 @@
-import type { ApiError, Contract, ConsumptionRecord } from "../types";
+import type { ApiError, Contract, ConsumptionRecord } from '../types';
 
-const BASE_URL = "https://gana-front.vercel.app";
+const BASE_URL = 'https://gana-front.vercel.app';
 
 async function parseErrorMessage(
   response: Response,
-  fallback: string
+  fallback: string,
 ): Promise<string> {
   try {
     const body = (await response.json()) as ApiError;
@@ -20,7 +20,7 @@ export async function getContracts(): Promise<Contract[]> {
     response = await fetch(`${BASE_URL}/api/contracts`);
   } catch {
     throw new Error(
-      "No se pudo conectar con el servidor para obtener los contratos"
+      'No se pudo conectar con el servidor para obtener los contratos',
     );
   }
 
@@ -28,8 +28,8 @@ export async function getContracts(): Promise<Contract[]> {
     throw new Error(
       await parseErrorMessage(
         response,
-        `Error al obtener los contratos (HTTP ${response.status})`
-      )
+        `Error al obtener los contratos (HTTP ${response.status})`,
+      ),
     );
   }
 
@@ -37,16 +37,16 @@ export async function getContracts(): Promise<Contract[]> {
 }
 
 export async function getConsumption(
-  contractId: number
+  contractId: number,
 ): Promise<ConsumptionRecord[]> {
   let response: Response;
   try {
     response = await fetch(
-      `${BASE_URL}/api/consumption?contract_id=${contractId}`
+      `${BASE_URL}/api/consumption?contract_id=${contractId}`,
     );
   } catch {
     throw new Error(
-      "No se pudo conectar con el servidor para obtener el historial de consumo"
+      'No se pudo conectar con el servidor para obtener el historial de consumo',
     );
   }
 
@@ -54,8 +54,8 @@ export async function getConsumption(
     throw new Error(
       await parseErrorMessage(
         response,
-        `Error al obtener el historial de consumo (HTTP ${response.status})`
-      )
+        `Error al obtener el historial de consumo (HTTP ${response.status})`,
+      ),
     );
   }
 

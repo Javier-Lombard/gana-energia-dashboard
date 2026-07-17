@@ -20,7 +20,7 @@ export interface ConsumptionRecord {
   eur: number;
 }
 
-export type ViewMode = "eur" | "kwh";
+export type ViewMode = 'eur' | 'kwh';
 
 export interface ApiError {
   error: string;

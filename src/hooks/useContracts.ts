@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { getContracts } from "../api/services";
-import type { Contract } from "../types";
+import { useEffect, useState } from 'react';
+import { getContracts } from '../api/services';
+import type { Contract } from '../types';
 
 interface UseContractsResult {
   contracts: Contract[];
@@ -29,7 +29,7 @@ export function useContracts(): UseContractsResult {
           setError(
             err instanceof Error
               ? err.message
-              : "Error desconocido al obtener los contratos"
+              : 'Error desconocido al obtener los contratos',
           );
         }
       } finally {

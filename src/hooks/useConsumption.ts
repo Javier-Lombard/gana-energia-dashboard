@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { getConsumption } from "../api/services";
-import type { ConsumptionRecord } from "../types";
+import { useEffect, useState } from 'react';
+import { getConsumption } from '../api/services';
+import type { ConsumptionRecord } from '../types';
 
 interface UseConsumptionResult {
   consumption: ConsumptionRecord[];
@@ -9,7 +9,7 @@ interface UseConsumptionResult {
 }
 
 export function useConsumption(
-  contractId: number | null
+  contractId: number | null,
 ): UseConsumptionResult {
   const [consumption, setConsumption] = useState<ConsumptionRecord[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -39,7 +39,7 @@ export function useConsumption(
           setError(
             err instanceof Error
               ? err.message
-              : "Error desconocido al obtener el historial de consumo"
+              : 'Error desconocido al obtener el historial de consumo',
           );
         }
       } finally {
