@@ -6,7 +6,7 @@ historial de facturación.
 
 ## Demo
 
-[Pendiente de desplegar]
+https://gana-energia-dashboard.vercel.app/
 
 ## Cómo ejecutar en local
 
@@ -19,6 +19,15 @@ La app arranca en `http://localhost:5173` (o el siguiente puerto libre). El
 proxy configurado en `vite.config.ts` redirige `/api/*` a la API real
 (`https://gana-front.vercel.app`) para evitar problemas de CORS en
 desarrollo — no requiere ninguna variable de entorno adicional.
+
+En producción no existe ningún servidor de desarrollo que pueda hacer de
+proxy, así que el mismo problema de CORS se resuelve con un `rewrite` en
+`vercel.json`, que redirige `/api/*` hacia la API real de forma transparente
+para el navegador (el propio Vercel reenvía la petición server-to-server).
+Así, tanto en local como en el
+[deploy](https://gana-energia-dashboard.vercel.app/), el código de
+`src/api/services.ts` usa siempre rutas relativas sin necesitar ningún
+cambio entre entornos.
 
 Otros comandos disponibles:
 
@@ -174,7 +183,19 @@ editor. En líneas generales me ayudó a:
   (código fuente, navegador real, descarte de Postman/curl como
   herramientas no sujetas a CORS), y se comunicó a la empresa de forma
   proactiva con una descripción técnica precisa. En paralelo se restauró el
-  proxy de Vite como solución temporal para no bloquear el desarrollo.
+  proxy de Vite como solución temporal para no bloquear el desarrollo,
+  aunque resultó ser una solución parcial: cubría la navegación directa a
+  la URL pero no las peticiones `fetch()` reales desde JavaScript de otro
+  origen, que es justo el escenario de la propia app — el problema
+  reapareció al ensamblar los componentes reales.
+- **Implementar una solución de CORS definitiva e independiente de
+  terceros**: en vez de depender de un segundo aviso a la empresa y esperar
+  de nuevo, se añadió un `rewrite` en `vercel.json`
+  (`/api/:path*` → `https://gana-front.vercel.app/api/:path*`) que resuelve
+  el CORS también en el entorno de producción, sin depender de que la API
+  externa añada nunca esas cabeceras. Verificado en el propio deploy: las
+  peticiones a `/api/contracts` y `/api/consumption` funcionan sin ningún
+  error de CORS en consola.
 - **Construir los estados de carga y error de extremo a extremo**: los
   componentes `Spinner`, `ErrorMessage` y `ErrorBoundary`, los skeletons con
   shimmer de `TariffCard` y `BillingChart`, y propagar `loading`/`error`
@@ -208,6 +229,15 @@ se tomó sin mi validación explícita.
   más antiguo a más reciente; se asumió que ese orden es estable y se
   construyó la paginación (bloques de 12 meses, más recientes a la derecha)
   sobre esa base sin reordenar los datos.
+- **Interpretación de "primera página" al cambiar de contrato**: el
+  enunciado indica que al cambiar de contrato la gráfica debe recargarse
+  "empezando de nuevo en la primera página", pero también especifica que
+  los datos más recientes deben mostrarse por defecto (a la derecha, como
+  última gráfica). Se interpretó "primera página" como la página por
+  defecto que ve el usuario al entrar — que en esta implementación es la
+  que contiene los meses más recientes — y no como el índice de página 1
+  en sentido literal, ya que esa segunda lectura entraría en contradicción
+  con el resto del enunciado.
 - **Selección inicial de contrato**: al no especificarse cuál debe verse por
   defecto, se asumió que debe seleccionarse automáticamente el primer
   contrato de la lista devuelta por `/api/contracts` en cuanto llega.
