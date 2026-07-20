@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://gana-front.vercel.app/api/:path*"
+    }
+  ]
+}
