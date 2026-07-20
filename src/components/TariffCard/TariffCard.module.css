@@ -36,7 +36,7 @@
 .tariffPill {
   padding: var(--spacing-3) var(--spacing-6);
   background-color: var(--color-primary-tint);
-  border-radius: 999px;
+  border-radius: var(--radius-md);
   font-size: 1.0625rem;
   color: var(--color-text-dark);
 }

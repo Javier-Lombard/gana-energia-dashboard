@@ -1,7 +1,9 @@
 .toggle {
   display: inline-flex;
+  align-self: flex-start;
   padding: 3px;
   background-color: var(--color-gray-light);
+  border: 1px solid #3ccfaf;
   border-radius: 999px;
 }
 
