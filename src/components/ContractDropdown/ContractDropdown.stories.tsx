@@ -58,3 +58,20 @@ export const Open: Story = {
     await userEvent.click(trigger);
   },
 };
+
+export const Loading: Story = {
+  args: {
+    contracts: [],
+    selectedId: null,
+    loading: true,
+  },
+};
+
+export const ConError: Story = {
+  args: {
+    contracts: [],
+    selectedId: null,
+    error: 'No se pudo conectar con el servidor para obtener los contratos',
+    onRetry: fn(),
+  },
+};

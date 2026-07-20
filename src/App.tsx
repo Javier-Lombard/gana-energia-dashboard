@@ -10,7 +10,12 @@ import styles from './App.module.css';
 
 function Dashboard() {
   const { state, dispatch } = useContractContext();
-  const { contracts, loading: contractsLoading } = useContracts();
+  const {
+    contracts,
+    loading: contractsLoading,
+    error: contractsError,
+    refetch: refetchContracts,
+  } = useContracts();
   const { consumption, loading, error, refetch } = useConsumption(
     state.selectedContractId,
   );
@@ -27,11 +32,21 @@ function Dashboard() {
 
   return (
     <>
-      <Header contracts={contracts} />
+      <Header
+        contracts={contracts}
+        loading={contractsLoading}
+        error={contractsError}
+        onRetry={refetchContracts}
+      />
       <main className={styles.main}>
         <div className={styles.leftColumn}>
           <WelcomeCard />
-          <TariffCard contract={selectedContract} loading={contractsLoading} />
+          <TariffCard
+            contract={selectedContract}
+            loading={contractsLoading}
+            error={contractsError}
+            onRetry={refetchContracts}
+          />
         </div>
         <BillingChart
           consumption={consumption}

@@ -5,9 +5,12 @@ import styles from './Header.module.css';
 import { GanarIcon } from '../ui/GanarIcon';
 interface HeaderProps {
   contracts: Contract[];
+  loading?: boolean;
+  error?: string | null;
+  onRetry?: () => void;
 }
 
-export function Header({ contracts }: HeaderProps) {
+export function Header({ contracts, loading, error, onRetry }: HeaderProps) {
   const { state, dispatch } = useContractContext();
 
   function handleSelect(id: number) {
@@ -31,6 +34,9 @@ export function Header({ contracts }: HeaderProps) {
           contracts={contracts}
           selectedId={state.selectedContractId}
           onSelect={handleSelect}
+          loading={loading}
+          error={error}
+          onRetry={onRetry}
         />
       </div>
 

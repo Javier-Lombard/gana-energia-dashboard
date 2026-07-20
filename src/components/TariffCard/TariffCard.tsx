@@ -1,12 +1,20 @@
 import type { Contract } from '../../types';
+import { ErrorMessage } from '../ui/ErrorMessage/ErrorMessage';
 import styles from './TariffCard.module.css';
 
 interface TariffCardProps {
   contract: Contract | null;
   loading: boolean;
+  error?: string | null;
+  onRetry?: () => void;
 }
 
-export function TariffCard({ contract, loading }: TariffCardProps) {
+export function TariffCard({
+  contract,
+  loading,
+  error = null,
+  onRetry,
+}: TariffCardProps) {
   return (
     <div className={styles.card}>
       <div className={styles.header}>
@@ -22,6 +30,8 @@ export function TariffCard({ contract, loading }: TariffCardProps) {
           <div className={styles.skeletonLine} />
           <div className={styles.skeletonLine} />
         </div>
+      ) : error && onRetry ? (
+        <ErrorMessage message={error} onRetry={onRetry} />
       ) : !contract ? (
         <p className={styles.emptyMessage}>No hay ningún contrato seleccionado.</p>
       ) : (

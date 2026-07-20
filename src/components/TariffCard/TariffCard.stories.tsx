@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { fn } from 'storybook/test';
 import { TariffCard } from './TariffCard';
 import type { Contract } from '../../types';
 
@@ -42,5 +43,14 @@ export const Empty: Story = {
   args: {
     contract: null,
     loading: false,
+  },
+};
+
+export const ConError: Story = {
+  args: {
+    contract: null,
+    loading: false,
+    error: 'No se pudo conectar con el servidor para obtener los contratos',
+    onRetry: fn(),
   },
 };

@@ -12,7 +12,10 @@ import {
 import type { ConsumptionRecord, ViewMode } from '../../types';
 import { Toggle } from '../Toggle/Toggle';
 import { Pagination } from '../Pagination/Pagination';
+import { ErrorMessage } from '../ui/ErrorMessage/ErrorMessage';
 import styles from './BillingChart.module.css';
+
+const SKELETON_BAR_HEIGHTS = [55, 80, 45, 95, 65, 40, 85, 60, 100, 50, 75, 35];
 
 interface BillingChartProps {
   consumption: ConsumptionRecord[];
@@ -158,13 +161,18 @@ export function BillingChart({
       />
 
       {loading ? (
-        <div className={styles.skeleton} />
+        <div className={styles.skeleton} aria-label="Cargando historial de facturación">
+          {SKELETON_BAR_HEIGHTS.map((height, index) => (
+            <div
+              key={index}
+              className={styles.skeletonBar}
+              style={{ height: `${height}%` }}
+            />
+          ))}
+        </div>
       ) : error ? (
         <div className={styles.stateBlock}>
-          <p className={styles.errorMessage}>{error}</p>
-          <button type="button" className={styles.retryButton} onClick={onRetry}>
-            Reintentar
-          </button>
+          <ErrorMessage message={error} onRetry={onRetry} />
         </div>
       ) : consumption.length === 0 ? (
         <div className={styles.stateBlock}>
