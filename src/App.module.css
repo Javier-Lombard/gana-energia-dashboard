@@ -18,3 +18,14 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 480px) {
+  .main {
+    gap: var(--spacing-4);
+    padding: var(--spacing-4);
+  }
+
+  .leftColumn {
+    gap: var(--spacing-4);
+  }
+}

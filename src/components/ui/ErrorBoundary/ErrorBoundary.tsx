@@ -21,7 +21,11 @@ export class ErrorBoundary extends Component<
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Error inesperado capturado por ErrorBoundary:', error, errorInfo);
+    console.error(
+      'Error inesperado capturado por ErrorBoundary:',
+      error,
+      errorInfo,
+    );
   }
 
   render() {

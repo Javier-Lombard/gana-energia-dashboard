@@ -33,7 +33,9 @@ export function TariffCard({
       ) : error && onRetry ? (
         <ErrorMessage message={error} onRetry={onRetry} />
       ) : !contract ? (
-        <p className={styles.emptyMessage}>No hay ningún contrato seleccionado.</p>
+        <p className={styles.emptyMessage}>
+          No hay ningún contrato seleccionado.
+        </p>
       ) : (
         <div className={styles.content}>
           <span className={styles.tariffPill}>{contract.tarifa_nombre}</span>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 import {
   Bar,
   BarChart,
@@ -128,9 +129,15 @@ export function BillingChart({
   error,
   onRetry,
 }: BillingChartProps) {
-  const totalPages = Math.max(1, Math.ceil(consumption.length / ITEMS_PER_PAGE));
+  const totalPages = Math.max(
+    1,
+    Math.ceil(consumption.length / ITEMS_PER_PAGE),
+  );
   const [currentPage, setCurrentPage] = useState(totalPages);
   const [activeKey, setActiveKey] = useState<string | null>(null);
+  const isMobile = useMediaQuery('(max-width: 600px)');
+  const chartHeight = isMobile ? 240 : 320;
+  const barSize = isMobile ? 18 : BAR_SIZE;
 
   useEffect(() => {
     setCurrentPage(Math.max(1, Math.ceil(consumption.length / ITEMS_PER_PAGE)));
@@ -142,7 +149,13 @@ export function BillingChart({
   );
   const slots = buildSlots(pageRecords, viewMode);
   const yAxisMax = getYAxisMax(slots);
-  const yAxisTicks = [0, yAxisMax / 4, yAxisMax / 2, (yAxisMax * 3) / 4, yAxisMax];
+  const yAxisTicks = [
+    0,
+    yAxisMax / 4,
+    yAxisMax / 2,
+    (yAxisMax * 3) / 4,
+    yAxisMax,
+  ];
 
   function goToPage(page: number) {
     setCurrentPage(page);
@@ -161,7 +174,10 @@ export function BillingChart({
       />
 
       {loading ? (
-        <div className={styles.skeleton} aria-label="Cargando historial de facturación">
+        <div
+          className={styles.skeleton}
+          aria-label="Cargando historial de facturación"
+        >
           {SKELETON_BAR_HEIGHTS.map((height, index) => (
             <div
               key={index}
@@ -186,53 +202,57 @@ export function BillingChart({
       ) : (
         <>
           <div className={styles.chartWrapper}>
-            <ResponsiveContainer width="100%" height={320}>
-              <BarChart
-                data={slots}
-                barSize={BAR_SIZE}
-                margin={{ top: 40, right: 8, left: 0, bottom: 8 }}
-                onMouseLeave={() => setActiveKey(null)}
-              >
-                <CartesianGrid vertical={false} stroke="#e2e6ea" />
-                <XAxis
-                  dataKey="key"
-                  axisLine={false}
-                  tickLine={false}
-                  interval={0}
-                  height={40}
-                  tick={(props) => <XAxisTick {...props} slots={slots} />}
-                />
-                <YAxis
-                  axisLine={false}
-                  tickLine={false}
-                  domain={[0, yAxisMax]}
-                  ticks={yAxisTicks}
-                  tickFormatter={(value: number) =>
-                    viewMode === 'kwh' ? `${value}kWh` : `${value}€`
-                  }
-                  width={56}
-                />
-                <Tooltip
-                  cursor={false}
-                  content={<CustomTooltip viewMode={viewMode} />}
-                />
-                <Bar
-                  dataKey="value"
-                  radius={[16, 16, 0, 0]}
-                  onMouseEnter={(data) =>
-                    setActiveKey((data.payload as ChartSlot).key)
-                  }
-                  isAnimationActive={false}
+            <div className={styles.chartScroll}>
+              <ResponsiveContainer width="100%" height={chartHeight}>
+                <BarChart
+                  data={slots}
+                  barSize={barSize}
+                  margin={{ top: 40, right: 8, left: 0, bottom: 8 }}
+                  onMouseLeave={() => setActiveKey(null)}
                 >
-                  {slots.map((slot) => (
-                    <Cell
-                      key={slot.key}
-                      fill={slot.key === activeKey ? BAR_COLOR_ACTIVE : BAR_COLOR}
-                    />
-                  ))}
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
+                  <CartesianGrid vertical={false} stroke="#e2e6ea" />
+                  <XAxis
+                    dataKey="key"
+                    axisLine={false}
+                    tickLine={false}
+                    interval={0}
+                    height={40}
+                    tick={(props) => <XAxisTick {...props} slots={slots} />}
+                  />
+                  <YAxis
+                    axisLine={false}
+                    tickLine={false}
+                    domain={[0, yAxisMax]}
+                    ticks={yAxisTicks}
+                    tickFormatter={(value: number) =>
+                      viewMode === 'kwh' ? `${value}kWh` : `${value}€`
+                    }
+                    width={isMobile ? 44 : 56}
+                  />
+                  <Tooltip
+                    cursor={false}
+                    content={<CustomTooltip viewMode={viewMode} />}
+                  />
+                  <Bar
+                    dataKey="value"
+                    radius={[16, 16, 0, 0]}
+                    onMouseEnter={(data) =>
+                      setActiveKey((data.payload as ChartSlot).key)
+                    }
+                    isAnimationActive={false}
+                  >
+                    {slots.map((slot) => (
+                      <Cell
+                        key={slot.key}
+                        fill={
+                          slot.key === activeKey ? BAR_COLOR_ACTIVE : BAR_COLOR
+                        }
+                      />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
           </div>
 
           <Pagination

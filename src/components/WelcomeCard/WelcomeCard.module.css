@@ -21,3 +21,13 @@
   font-size: 0.9375rem;
   color: #b4b8c5;
 }
+
+@media (max-width: 480px) {
+  .card {
+    padding: var(--spacing-4);
+  }
+
+  .title {
+    font-size: 1.125rem;
+  }
+}

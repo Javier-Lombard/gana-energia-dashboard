@@ -50,7 +50,13 @@ npm run storybook   # catálogo de componentes aislados en :6006
   capa de utilidades (Tailwind) ni de runtime CSS-in-JS (styled-components).
   Para un dashboard de tamaño acotado con un puñado de componentes, es la
   opción con menos dependencias y curva de aprendizaje más baja, manteniendo
-  el CSS legible y colocado junto al componente que lo usa.
+  el CSS legible y colocado junto al componente que lo usa. Cada componente
+  define sus propios breakpoints en su `.module.css` (en vez de un único
+  breakpoint global) para el layout responsive; el caso especial es
+  `BillingChart`, donde el hook `useMediaQuery`
+  (`src/hooks/useMediaQuery.ts`) ajusta en JS la altura y el tamaño de
+  barra de la gráfica de Recharts en móvil, algo que no se puede resolver
+  solo con CSS.
 - **Recharts**: gráfica de barras declarativa sobre SVG, con soporte nativo
   de tooltip y ejes personalizables. Evita escribir en canvas o D3 a mano
   para un único gráfico de barras con paginación.
@@ -145,8 +151,6 @@ deciden cómo pintarlos:
 - Tests unitarios (Vitest) y de integración (Testing Library) — el proyecto
   no tiene suite de tests todavía, solo verificación manual y visual vía
   Storybook.
-- Responsive completo con breakpoints para tablet y móvil (el layout actual
-  solo tiene un ajuste básico a una columna).
 - Animaciones en la transición de datos al cambiar de contrato.
 - Dark mode.
 - PWA con service worker para uso offline.

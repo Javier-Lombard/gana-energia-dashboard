@@ -21,8 +21,7 @@ export function Header({ contracts, loading, error, onRetry }: HeaderProps) {
     <header className={styles.header}>
       <div className={styles.logoBlock}>
         <div className={styles.logo}>
-         <GanarIcon/>
-         
+          <GanarIcon />
         </div>
         <span className={styles.badge}>Área Cliente</span>
       </div>
