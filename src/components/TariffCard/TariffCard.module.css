@@ -62,9 +62,50 @@
   overflow-wrap: break-word;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 680px) {
   .card {
-    padding: var(--spacing-4);
+    gap: var(--spacing-3);
+    padding: var(--spacing-3);
+  }
+
+  .title {
+    font-size: 0.9rem;
+  }
+
+  .icon {
+    font-size: 0.9rem;
+  }
+
+  .content {
+    gap: var(--spacing-3);
+  }
+
+  .tariffPill {
+    padding: var(--spacing-2) var(--spacing-4);
+    font-size: 0.8125rem;
+  }
+
+  .powerRow {
+    gap: var(--spacing-2) var(--spacing-4);
+  }
+
+  .field {
+    font-size: 0.75rem;
+  }
+
+  .emptyMessage {
+    padding: var(--spacing-4) 0;
+    font-size: 0.75rem;
+  }
+
+  .skeletonPill {
+    width: 110px;
+    height: 28px;
+  }
+
+  .skeletonLine {
+    width: 140px;
+    height: 12px;
   }
 }
 
