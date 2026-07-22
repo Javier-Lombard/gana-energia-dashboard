@@ -34,6 +34,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-weight: 600;
 }
 
 .trigger:disabled {
@@ -57,6 +58,7 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 0.9375rem;
+  font-weight: 600;
   color: #b3392f;
 }
 
@@ -123,6 +125,7 @@
 .option {
   padding: var(--spacing-3) var(--spacing-4);
   font-size: 0.9375rem;
+  font-weight: 600;
   color: var(--color-text-dark);
   white-space: nowrap;
   cursor: pointer;
